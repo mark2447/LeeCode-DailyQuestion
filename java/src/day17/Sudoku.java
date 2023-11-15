@@ -46,9 +46,4 @@ public class Sudoku {
         return true;
     }
 
-    public static void main(String[] args) {
-        char[][] board = new char[9][9];
-        board[0] = new char[]{"5","3",".",".","7",".",".",".","."};
-
-    }
 }
