@@ -7,33 +7,30 @@ public class LC257BinaryTreePath {
             return new ArrayList<>();
         }
         List<String> res= new ArrayList<>();
-        traverse(root, res, new ArrayList<>());
+        traverse(root, res, new StringBuilder());
         return res;
     }
 
-    public void traverse(TreeNode node, List<String> res, List<String> path) {
+    public void traverse(TreeNode node, List<String> res, StringBuilder sb) {
         if (node == null) {
             return;
         }
-        path.add(String.valueOf(node.val));
+        sb.append(node.val);
+        int len=sb.length();
+
         if (node.left == null && node.right == null) {
-            StringBuilder sb = new StringBuilder();
-            for (int i = 0; i < path.size() -1 ; i++) {
-                sb.append(path.get(i));
-                sb.append("->");
-            }
-            sb.append(String.valueOf(node.val));
             res.add(sb.toString());
             return;
         }
-
         if (node.left != null) {
-            traverse(node.left, res, path);
-            path.remove(path.size() - 1);
+            sb.append("->");
+            traverse(node.left, res, sb);
+            sb.delete(len, sb.length());
         }
         if (node.right != null) {
-            traverse(node.right, res, path);
-            path.remove(path.size() - 1);
+            sb.append("->");
+            traverse(node.right, res, sb);
+            sb.delete(len, sb.length());
         }
     }
 }
